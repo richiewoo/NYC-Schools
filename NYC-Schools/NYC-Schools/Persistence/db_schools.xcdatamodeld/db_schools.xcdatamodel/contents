@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="School" representedClassName="SchoolMO" syncable="YES" codeGenerationType="class">
+        <attribute name="address" attributeType="String"/>
+        <attribute name="city" attributeType="String"/>
+        <attribute name="dbn" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="latitude" optional="YES" attributeType="String"/>
+        <attribute name="longitude" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="overview" attributeType="String"/>
+        <attribute name="website" attributeType="String"/>
+        <attribute name="zip" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="School" positionX="-63" positionY="-18" width="128" height="179"/>
+    </elements>
+</model>
