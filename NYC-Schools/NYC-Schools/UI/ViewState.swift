@@ -8,7 +8,6 @@
 import Foundation
 
 enum ViewState<T> {
-    case notRequested
     case loading
     case loaded(T?)
     case error(String)

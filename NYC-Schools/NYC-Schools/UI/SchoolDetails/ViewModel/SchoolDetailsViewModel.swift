@@ -8,17 +8,17 @@
 import SwiftUI
 
 final class SchoolDetailsViewModel: ObservableObject {
-    @Published var state: ViewState<Score> = .notRequested
-    let school: School
-    var score: Score?
+    @Published var state: ViewState<Score> = .loading
     
-    let titleScore = "Score"
-    let titleReading = "Reading"
-    let titleWriteing = "Writing"
-    let titleMath = "Math"
-    let titleNumTakers = "Num of sat test takers: "
-    let titleOverView = "Overview"
-    let scoreNotAvailable = "Score not available"
+    public let school: School
+    
+    public let titleScore = "Score"
+    public let titleReading = "Reading"
+    public let titleWriteing = "Writing"
+    public let titleMath = "Math"
+    public let titleNumTakers = "Num of sat test takers: "
+    public let titleOverView = "Overview"
+    public let scoreNotAvailable = "Score not available"
     
     private let repository: SchoolRepository
     
@@ -27,19 +27,17 @@ final class SchoolDetailsViewModel: ObservableObject {
         self.school = school
     }
     
-    func loadScore() {
+    public func loadScore() {
         repository.fetchScore(for: school.dbn) { [unowned self] result in
             switch result {
             case .success(let score):
                 DispatchQueue.main.async {
-                    if let sc = score {
-                        self.state = .loaded(sc)
-                    } else {
-                        self.state = .loaded(nil)
-                    }
+                    self.state = .loaded(score)
                 }
             case .failure(let err):
-                self.state = .error(err.description)
+                DispatchQueue.main.async {
+                    self.state = .error(err.description)
+                }
             }
         }
     }

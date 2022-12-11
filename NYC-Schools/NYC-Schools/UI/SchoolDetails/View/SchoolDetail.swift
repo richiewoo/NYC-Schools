@@ -13,11 +13,7 @@ struct SchoolDetail: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                if let locationCoordinate = viewModel.school.locationCoordinate {
-                    MapView(coordinate: locationCoordinate)
-                        .ignoresSafeArea(edges: .top)
-                        .frame(height: 200)
-                }
+                //Basic info views
                 Text(viewModel.school.name)
                     .font(.title)
                 HStack {
@@ -28,19 +24,27 @@ struct SchoolDetail: View {
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 
+                // Map view
+                if let locationCoordinate = viewModel.school.locationCoordinate {
+                    MapView(coordinate: locationCoordinate)
+                        .ignoresSafeArea(edges: .top)
+                        .frame(height: 200)
+                }
+                
                 Divider()
                 
+                // Score views
+                Text(viewModel.titleScore)
+                        .font(.title2)
+                
                 switch viewModel.state {
-                case .notRequested:
-                    Color.clear.onAppear {
-                        viewModel.loadScore()
-                    }
                 case .loading:
                     ProgressView()
+                        .task {
+                            viewModel.loadScore()
+                        }
                 case .loaded(let scr):
                     VStack(alignment: .leading) {
-                        Text(viewModel.titleScore)
-                            .font(.title2)
                         if let score = scr {
                             Text(viewModel.titleNumTakers + score.numOfTakers)
                                 .font(.subheadline)
@@ -81,6 +85,7 @@ struct SchoolDetail: View {
                 
                 Divider()
                 
+                // Overview
                 VStack(alignment: .leading) {
                     Text(viewModel.titleOverView)
                         .font(.title2)

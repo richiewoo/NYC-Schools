@@ -10,7 +10,7 @@ import SwiftUI
 
 
 final class SchoolViewModel: ObservableObject {
-    @Published var state: ViewState<[School]> = .notRequested
+    @Published var state: ViewState<[School]> = .loading
     public let title = "Schools"
     
     private var currPage = -1 //record current page idx

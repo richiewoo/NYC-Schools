@@ -12,12 +12,11 @@ struct SchoolListView: View {
     
     var body: some View {
         switch viewModel.state {
-        case .notRequested:
-            Color.clear.onAppear {
-                viewModel.loadSchools(for: true)
-            }
         case .loading:
             ProgressView()
+                .task {
+                viewModel.loadSchools(for: true)
+            }
         case .loaded(let schools):
             NavigationView {
                 if let schools = schools {
